@@ -13,7 +13,7 @@ const Product = ({ match }) => {
       setProduct(data)
     }
     fetchProduct()
-  }, [match.params.id])
+  }, [match])
   // get the id from App Route path :id
   // const product = products.find(p => p._id === match.params.id)
 
