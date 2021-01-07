@@ -2,11 +2,13 @@ import mongoose, { mongo } from 'mongoose'
 
 const orderSchema = mongoose.Schema(
   {
+    // each order belongs to user
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
+    // has many products
     orderItems: [
       {
         name: {

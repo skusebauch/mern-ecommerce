@@ -46,6 +46,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    // has many reviews
     reviews: [reviewSchema],
     rating: {
       type: Number,
