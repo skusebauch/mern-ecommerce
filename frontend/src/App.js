@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Home from './pages/Home'
-import Product from './pages/Product'
-import Cart from './pages/Cart'
+import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage'
+import CartPage from './pages/CartPage'
 
 function App() {
   return (
@@ -13,9 +13,9 @@ function App() {
       <Header />
       <main className='py-3'>
         <Container>
-          <Route path='/' component={Home} exact />
-          <Route path='/product/:id' component={Product} />
-          <Route path='/cart/:id?' component={Cart} />
+          <Route path='/' component={HomePage} exact />
+          <Route path='/product/:id' component={ProductPage} />
+          <Route path='/cart/:id?' component={CartPage} />
         </Container>
       </main>
       <Footer />

@@ -1,12 +1,11 @@
 import * as types from '../constants/cartConstants'
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
-  switch (action.types) {
+  switch (action.type) {
     case types.CART_ADD_ITEM:
       const item = action.payload
       // check for same id to handle this already exist case
       const existItem = state.cartItems.find(x => x.product === item.product)
-
       if (existItem) {
         return {
           ...state,

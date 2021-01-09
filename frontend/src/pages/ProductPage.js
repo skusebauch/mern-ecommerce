@@ -7,8 +7,8 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-const Product = ({ history, match }) => {
-  const [qty, setQty] = useState(0)
+const ProductPage = ({ history, match }) => {
+  const [qty, setQty] = useState(1)
   const dispatch = useDispatch()
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
@@ -112,4 +112,4 @@ const Product = ({ history, match }) => {
   )
 }
 
-export default Product
+export default ProductPage
