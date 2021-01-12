@@ -56,7 +56,7 @@ const ProfilePage = ({ location, history }) => {
         {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId='name'>
+          <Form.Group controlledid='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
               type='name'
@@ -65,7 +65,7 @@ const ProfilePage = ({ location, history }) => {
               onChange={e => setName(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='email'>
+          <Form.Group controlledid='email'>
             <Form.Label>Email Address</Form.Label>
             <Form.Control
               type='email'
@@ -74,7 +74,7 @@ const ProfilePage = ({ location, history }) => {
               onChange={e => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='password'>
+          <Form.Group controlledid='password'>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type='password'
@@ -83,7 +83,7 @@ const ProfilePage = ({ location, history }) => {
               onChange={e => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='confirmPassword'>
+          <Form.Group controlledid='confirmPassword'>
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type='password'

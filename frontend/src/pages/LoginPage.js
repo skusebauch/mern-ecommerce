@@ -34,7 +34,7 @@ const LoginPage = ({ location, history }) => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlledId='email'>
+        <Form.Group controlledid='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type='email'
@@ -43,7 +43,7 @@ const LoginPage = ({ location, history }) => {
             onChange={e => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlledId='email'>
+        <Form.Group controlledid='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'

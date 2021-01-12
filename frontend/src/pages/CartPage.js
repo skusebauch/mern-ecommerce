@@ -24,7 +24,7 @@ const CartPage = ({ match, location, history }) => {
   }
 
   const checkoutHandler = () => {
-    // if logged in go to shipping else login
+    // if logged in go to shipping else login - check is at loginPage
     history.push('/login?redirect=shipping')
   }
 
