@@ -20,7 +20,7 @@ export const createOrder = order => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(`/api/orders`, order, config)
-    // data = get back from userController.js res.json({})
+
     dispatch({
       type: types.ORDER_CREATE_SUCCESS,
       payload: data,
@@ -28,6 +28,40 @@ export const createOrder = order => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: types.ORDER_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    })
+  }
+}
+
+export const getOrderDetails = id => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: types.ORDER_DETAILS_REQUEST,
+    })
+
+    // destructure userLogin.userInfo from state
+    const {
+      userLogin: { userInfo },
+    } = getState()
+    // get - get rid of contentType -> only at post req
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/orders/${id}`, config)
+
+    dispatch({
+      type: types.ORDER_DETAILS_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: types.ORDER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
