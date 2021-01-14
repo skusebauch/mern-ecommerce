@@ -79,20 +79,19 @@ export const payOrder = (orderId, paymentResult) => async (
       type: types.ORDER_PAY_REQUEST,
     })
 
-    // destructure userLogin.userInfo from state
     const {
       userLogin: { userInfo },
     } = getState()
-    // get - get rid of contentType -> only at post req
+
     const config = {
       headers: {
-        'Content-Type': 'application.json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
 
     const { data } = await axios.put(
-      `/api/orders/${orderId},pay`,
+      `/api/orders/${orderId}/pay`,
       paymentResult,
       config
     )
@@ -103,7 +102,7 @@ export const payOrder = (orderId, paymentResult) => async (
     })
   } catch (error) {
     dispatch({
-      type: types.ORDER_PAY_FAIL,
+      type: types.ORDER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
