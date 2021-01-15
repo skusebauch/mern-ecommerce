@@ -1,5 +1,7 @@
 import axios from 'axios'
 import * as types from '../constants/userConstants'
+import * as typesOrder from '../constants/orderConstants'
+import * as typesCart from '../constants/cartConstants'
 
 export const login = (email, password) => async dispatch => {
   try {
@@ -36,9 +38,21 @@ export const login = (email, password) => async dispatch => {
 }
 
 export const logout = () => dispatch => {
-  localStorage.removeItem('userInfo')
+  localStorage.clear()
   dispatch({
     type: types.USER_LOGOUT,
+  })
+  dispatch({
+    type: types.USER_DETAILS_RESET,
+  })
+  dispatch({
+    type: typesOrder.MY_ORDERS_LIST_RESET,
+  })
+  dispatch({
+    type: types.USER_REGISTER_RESET,
+  })
+  dispatch({
+    type: typesCart.CART_RESET,
   })
 }
 
