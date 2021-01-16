@@ -39,21 +39,12 @@ export const login = (email, password) => async dispatch => {
 
 export const logout = () => dispatch => {
   localStorage.clear()
-  dispatch({
-    type: types.USER_LOGOUT,
-  })
-  dispatch({
-    type: types.USER_DETAILS_RESET,
-  })
-  dispatch({
-    type: typesOrder.MY_ORDERS_LIST_RESET,
-  })
-  dispatch({
-    type: types.USER_REGISTER_RESET,
-  })
-  dispatch({
-    type: typesCart.CART_RESET,
-  })
+  dispatch({ type: types.USER_LOGOUT })
+  dispatch({ type: types.USER_LIST_RESET })
+  dispatch({ type: types.USER_DETAILS_RESET })
+  dispatch({ type: typesOrder.MY_ORDERS_LIST_RESET })
+  dispatch({ type: types.USER_REGISTER_RESET })
+  dispatch({ type: typesCart.CART_RESET })
 }
 
 export const register = (name, email, password) => async dispatch => {
@@ -164,6 +155,104 @@ export const updateUserProfile = user => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: types.USER_UPDATE_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    })
+  }
+}
+
+export const listUsers = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: types.USER_LIST_REQUEST,
+    })
+
+    // destructure userLogin.userInfo from state
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/users`, config)
+    // data = get back from userController.js res.json({})
+    dispatch({
+      type: types.USER_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: types.USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    })
+  }
+}
+
+export const deleteUser = id => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: types.USER_DELETE_REQUEST,
+    })
+
+    // destructure userLogin.userInfo from state
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.delete(`/api/users/${id}`, config)
+    // data = get back from userController.js res.json({})
+    dispatch({ type: types.USER_DELETE_SUCCESS })
+  } catch (error) {
+    dispatch({
+      type: types.USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    })
+  }
+}
+
+export const updateUser = user => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: types.USER_UPDATE_REQUEST,
+    })
+
+    // destructure userLogin.userInfo from state
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+    // data = get back from userController.js res.json({})
+    dispatch({ type: types.USER_UPDATE_SUCCESS })
+    dispatch({ type: types.USER_DETAILS_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: types.USER_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
