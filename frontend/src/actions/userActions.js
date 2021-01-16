@@ -39,21 +39,12 @@ export const login = (email, password) => async dispatch => {
 
 export const logout = () => dispatch => {
   localStorage.clear()
-  dispatch({
-    type: types.USER_LOGOUT,
-  })
-  dispatch({
-    type: types.USER_DETAILS_RESET,
-  })
-  dispatch({
-    type: typesOrder.MY_ORDERS_LIST_RESET,
-  })
-  dispatch({
-    type: types.USER_REGISTER_RESET,
-  })
-  dispatch({
-    type: typesCart.CART_RESET,
-  })
+  dispatch({ type: types.USER_LOGOUT })
+  dispatch({ type: types.USER_LIST_RESET })
+  dispatch({ type: types.USER_DETAILS_RESET })
+  dispatch({ type: typesOrder.MY_ORDERS_LIST_RESET })
+  dispatch({ type: types.USER_REGISTER_RESET })
+  dispatch({ type: typesCart.CART_RESET })
 }
 
 export const register = (name, email, password) => async dispatch => {
