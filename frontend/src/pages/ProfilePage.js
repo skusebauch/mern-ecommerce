@@ -46,7 +46,7 @@ const ProfilePage = ({ location, history }) => {
         setEmail(user.email)
       }
     }
-  }, [dispatch, history, userInfo, user, success, myOrdersList])
+  }, [dispatch, history, userInfo, user, success])
 
   const submitHandler = e => {
     e.preventDefault()
