@@ -91,6 +91,33 @@ const ProductEditPage = ({ match, history }) => {
                 onChange={e => setBrand(e.target.value)}
               ></Form.Control>
             </Form.Group>
+            <Form.Group controlledid='countInStock'>
+              <Form.Label>Count In Stock</Form.Label>
+              <Form.Control
+                type='number'
+                placeholder='Enter countInStock'
+                value={countInStock}
+                onChange={e => setCountInStock(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlledid='category'>
+              <Form.Label>category</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter Category'
+                value={category}
+                onChange={e => setCategory(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlledid='description'>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter Description'
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
             <Button type='submit' variant='primary'>
               Update
             </Button>
