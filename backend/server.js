@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
@@ -14,6 +15,11 @@ dotenv.config()
 connectDB()
 
 const app = express()
+
+// middleware for dev mode logger morgan to see http request
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
 // body parser to allow sending body - user req.body at usersController.js
 app.use(express.json())
