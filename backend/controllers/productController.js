@@ -6,7 +6,7 @@ import Product from '../models/productModel.js'
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
   // pageination
-  const pageSize = 2
+  const pageSize = 10
   // ?pageNumber=1
   const page = Number(req.query.pageNumber) || 1
 
@@ -21,7 +21,7 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {}
 
-  const count = await Product.count({ ...keyword })
+  const count = await Product.countDocuments({ ...keyword })
 
   // either empty for everything or the keyword
   const products = await Product.find({ ...keyword })

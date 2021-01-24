@@ -2,11 +2,16 @@ import axios from 'axios'
 import * as types from '../constants/productConstants'
 
 // async request therefore thunk
-export const listProducts = (keyword = '') => async dispatch => {
+export const listProducts = (
+  keyword = '',
+  pageNumber = ''
+) => async dispatch => {
   try {
     dispatch({ type: types.PRODUCT_LIST_REQUEST })
 
-    const { data } = await axios.get(`/api/products?keyword=${keyword}`)
+    const { data } = await axios.get(
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+    )
     dispatch({
       type: types.PRODUCT_LIST_SUCCESS,
       payload: data,
