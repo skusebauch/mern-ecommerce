@@ -102,7 +102,44 @@ export const payOrder = (orderId, paymentResult) => async (
     })
   } catch (error) {
     dispatch({
-      type: types.ORDER_DETAILS_FAIL,
+      type: types.ORDER_PAY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    })
+  }
+}
+
+export const deliverOrder = order => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: types.ORDER_DELIVER_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/deliver`,
+      {},
+      config
+    )
+
+    dispatch({
+      type: types.ORDER_DELIVER_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: types.ORDER_DELIVER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -147,7 +184,7 @@ export const getMyOrdersList = () => async (dispatch, getState) => {
 export const getOrderList = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: types.ORDERS_LIST_REQUEST,
+      type: types.ORDER_LIST_REQUEST,
     })
 
     const {
@@ -163,12 +200,12 @@ export const getOrderList = () => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/orders`, config)
 
     dispatch({
-      type: types.ORDERS_LIST_SUCCESS,
+      type: types.ORDER_LIST_SUCCESS,
       payload: data,
     })
   } catch (error) {
     dispatch({
-      type: types.ORDERS_LIST_FAIL,
+      type: types.ORDER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
