@@ -43,6 +43,7 @@ export const logout = () => dispatch => {
   dispatch({ type: types.USER_LIST_RESET })
   dispatch({ type: types.USER_DETAILS_RESET })
   dispatch({ type: typesOrder.MY_ORDERS_LIST_RESET })
+  dispatch({ type: typesOrder.ORDERS_LIST_RESET })
   dispatch({ type: types.USER_REGISTER_RESET })
   dispatch({ type: typesCart.CART_RESET })
 }
