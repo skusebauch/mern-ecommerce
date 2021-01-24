@@ -2,6 +2,7 @@ import axios from 'axios'
 import * as types from '../constants/userConstants'
 import * as typesOrder from '../constants/orderConstants'
 import * as typesCart from '../constants/cartConstants'
+import * as typesProduct from '../constants/productConstants'
 
 export const login = (email, password) => async dispatch => {
   try {
@@ -46,6 +47,7 @@ export const logout = () => dispatch => {
   dispatch({ type: typesOrder.ORDER_LIST_RESET })
   dispatch({ type: types.USER_REGISTER_RESET })
   dispatch({ type: typesCart.CART_RESET })
+  dispatch({ type: typesProduct.PRODUCT_CREATE_REVIEW_RESET })
 }
 
 export const register = (name, email, password) => async dispatch => {
